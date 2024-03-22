@@ -26,4 +26,5 @@ type Detail struct {
 	InitiationGame    bool
 	MaxPlayers        int
 	RegisteredPlayers int
+	Completed         bool
 }

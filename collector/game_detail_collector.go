@@ -86,7 +86,7 @@ func MakeGameDetailCollector(detailList *xsync.MapOf[string, game.Detail]) (*col
 			MasterName:        strings.TrimSpace(masterName),
 			MasterDescription: strings.TrimSpace(masterDesc),
 			StartDate:         startDate,
-			Duration:          shortDuration(duration),
+			Duration:          strconv.Itoa(durationHours),
 			EndDate:           startDate.Add(duration),
 			Security:          strings.TrimSpace(security),
 			SensibleContent:   strings.TrimSpace(sensibleContent),
@@ -96,6 +96,7 @@ func MakeGameDetailCollector(detailList *xsync.MapOf[string, game.Detail]) (*col
 			InitiationGame:    strings.TrimSpace(initiation) == "Si",
 			MaxPlayers:        maxPlayers,
 			RegisteredPlayers: regPlayers,
+			Completed:         maxPlayers == regPlayers,
 		}
 		detailList.Store(gameId, gameDetail)
 
@@ -161,6 +162,7 @@ func parseDate(dateStr string) (time.Time, error) {
 	loc, _ := time.LoadLocation("Europe/Madrid")
 	dateStr = strings.ReplaceAll(dateStr, "\n", "")
 	dateStr = strings.ReplaceAll(dateStr, "marzo", "Mar")
+	dateStr = strings.ReplaceAll(dateStr, "abril", "Apr")
 	dateStr = strings.TrimSpace(dateStr)
 
 	dateStr = removeFirstWord(dateStr)

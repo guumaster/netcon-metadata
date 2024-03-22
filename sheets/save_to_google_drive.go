@@ -35,7 +35,7 @@ func SaveToGoogleSheet(ctx context.Context, list *xsync.MapOf[string, game.Detai
 			{
 				"game_id", "title", "system", "description", "master_name", "master_description",
 				"start_date", "duration", "end_date", "security", "sensible_content", "platform",
-				"channel", "streamed", "initiation_game", "max_players", "registered_players",
+				"channel", "streamed", "initiation_game", "max_players", "registered_players", "completed",
 			},
 		},
 	}
@@ -46,7 +46,7 @@ func SaveToGoogleSheet(ctx context.Context, list *xsync.MapOf[string, game.Detai
 		rows.Values = append(rows.Values, []any{
 			gameData.Id, gameData.Title, gameData.System, gameData.Description, gameData.MasterName, gameData.MasterDescription,
 			gameData.StartDate, gameData.Duration, gameData.EndDate, gameData.Security, gameData.SensibleContent, gameData.Platform,
-			gameData.Channel, gameData.Streamed, gameData.InitiationGame, gameData.MaxPlayers, gameData.RegisteredPlayers,
+			gameData.Channel, gameData.Streamed, gameData.InitiationGame, gameData.MaxPlayers, gameData.RegisteredPlayers, gameData.Completed,
 		})
 	}
 
