@@ -12,8 +12,9 @@ import (
 	"google.golang.org/api/option"
 	"google.golang.org/api/sheets/v4"
 
-	"github.com/guumaster/netcon-metadata/game"
 	"github.com/puzpuzpuz/xsync/v3"
+
+	"github.com/guumaster/netcon-metadata/game"
 )
 
 const (
@@ -88,12 +89,14 @@ func SaveToGoogleCalendarSheet(ctx context.Context, list *xsync.MapOf[string, ga
 			streamed = "Si"
 			streamMark = "🎥"
 		}
-		hasOpenSeats := "🔒"
+		hasOpenSeats := "✅"
 		freeSeats := game.MaxPlayers - game.RegisteredPlayers
+		seats := ""
 		if freeSeats > 0 {
 			hasOpenSeats = "✨"
+			seats = fmt.Sprintf(" [%d/%d]", freeSeats, game.MaxPlayers)
 		}
-		title := fmt.Sprintf("%s [%d/%d] %s %s", hasOpenSeats, freeSeats, game.MaxPlayers, game.Title, streamMark)
+		title := fmt.Sprintf("%s%s %s %s", hasOpenSeats, seats, game.Title, streamMark)
 		start := game.StartDate.Format("2006-01-02")
 		end := game.EndDate.Format("2006-01-02")
 		startTime := game.StartDate.Format("15:04:05")
